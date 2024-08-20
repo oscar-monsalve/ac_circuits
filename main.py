@@ -9,7 +9,7 @@ def main() -> None:
     z2 = complex(0, 50)
 
     v_z1 = helpers.voltage_divider(z1, z2, v)
-    v_z22= helpers.voltage_divider(z1, z2, v)
+    v_z2 = helpers.voltage_divider(z1, z2, v)
 
     print(v_z1)
     print(v_z2)
