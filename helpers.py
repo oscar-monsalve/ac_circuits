@@ -1,6 +1,14 @@
+def parallel_of_two(z1: complex, z2: complex):
+    """
+    Returns the equivalent impedance of two parallel-connected impedances.
+    """
+
+    return (z1 * z2) / (z1 + z2)
+
+
 def current_divider(z1: complex, z2: complex, i_total: complex) -> complex:
     """
-    Returns the complex current flowing through the impedances z1 or z2.
+    Returns the complex current flowing through the impedances z1 and z2.
     """
     i_z1 = (z2 / (z1 + z2)) * i_total
     i_z2 = (z1 / (z1 + z2)) * i_total
@@ -10,7 +18,7 @@ def current_divider(z1: complex, z2: complex, i_total: complex) -> complex:
 
 def voltage_divider(z1: complex, z2: complex, vs: complex):
     """
-    Returns the complex voltage drop at the impedances z1 or z2.
+    Returns the voltage phasor drop at the impedances z1 and z2.
     """
     v_z1 = (z1 / (z1 + z2)) * vs
     v_z2 = (z2 / (z1 + z2)) * vs
