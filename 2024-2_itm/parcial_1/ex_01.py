@@ -6,6 +6,8 @@ import helpers  # nopep8
 
 
 def main() -> None:
+    # Exercise 1
+
     # sinusoid 1
     amp1 = -15
     phase_angle1 = 30
