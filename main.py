@@ -4,33 +4,31 @@ import numpy as np
 
 
 def main() -> None:
-    it = cmath.rect(2, np.deg2rad(-20))
+    # sinusoid 1
+    amp1 = 15
+    phase_angle1 = 120
+    is_sine1 = False
 
-    z1 = complex(2, 6)
-    z2 = complex(0, 5)
+    # sinusoid 2
+    amp2 = 52.84
+    phase_angle2 = -28.44
+    is_sine2 = False
 
-    zeq = helpers.parallel_of_two(z1, z2)
+    phasor1_rec = helpers.sinusoid2cos(amp1, phase_angle1, is_sine1)
+    phasor1_pol = cmath.polar(phasor1_rec)
 
-    i1, i2 = helpers.current_divider(z1, z2, it)
-    i1_pol = cmath.polar(i1)
-    i2_pol = cmath.polar(i2)
+    phasor2_rec = helpers.sinusoid2cos(amp2, phase_angle2, is_sine2)
+    phasor2_pol = cmath.polar(phasor2_rec)
 
-    C = 5 * 10**(-3)
-    L = 5 * 10**(-3)
-    omega = 2*np.pi*60
+    sinusoids_phase_angle = helpers.sinusoids_phase_angle(phasor1_rec, phasor2_rec)
 
-    xc = helpers.reactance_capacitor(C, omega)
-    xl = helpers.reactance_inductor(L, omega)
+    sum = helpers.sum_cosine_sinusoids(phasor1_rec, phasor2_rec)
 
-    phase = cmath.phase(xc)
-    print(np.rad2deg(phase))
-
-    print(f"xc: {xc} Ω")
-    print(f"xl: {xl} Ω\n")
-
-    print(f"Zeq: {zeq:.2f} Ω\n")
-    print(f"I1 -> {i1_pol[0]:.2f} A ∠{np.rad2deg(i1_pol[1]):.2f}°")
-    print(f"I2 -> {i2_pol[0]:.2f} A ∠{np.rad2deg(i2_pol[1]):.2f}°")
+    helpers.format_pol(phasor1_pol, "voltage")
+    helpers.format_pol(phasor2_pol, "impedance")
+    print(f"The angle between v1 and v2 is: {sinusoids_phase_angle}°")
+    helpers.lags_or_leads(phasor1_rec, phasor2_rec)
+    helpers.format_pol(sum, "voltage")
 
 
 if __name__ == "__main__":

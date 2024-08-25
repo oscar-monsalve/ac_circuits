@@ -1,3 +1,6 @@
+import cmath
+import numpy as np
+
 
 def parallel_of_two(z1: complex, z2: complex) -> complex:
     """
@@ -55,13 +58,100 @@ def delta_to_star(za: complex, zb: complex, zc: complex) -> complex:
 
 def reactance_capacitor(C: float, omega: float) -> complex:
     """
-    Return the capacitive reactance with a known capacitance C and the rotational frequency Ω.
+    Returns the capacitive reactance with a known capacitance C and the rotational frequency Ω.
     """
     return 1 / (omega * C * complex(0, 1))
 
 
 def reactance_inductor(L: float, omega: float) -> complex:
     """
-    Return the inductive reactance with a known inductance L and the rotational frequency ω.
+    Returns the inductive reactance with a known inductance L and the rotational frequency ω.
     """
     return omega * L * complex(0, 1)
+
+
+def format_pol(pol: tuple[float, float], phasor_type: str, name: str) -> None:
+    """
+    Returns the formatted version a polar number as: "module ∠ angle".
+
+    Args:
+    pol: a tuple (module, angle), angle in radians.
+    phasor_type: either of the following strings: "impedance", "voltage", or "current".
+    name: variable name, e.g., "V1".
+    """
+    if phasor_type == "impedance":
+        return print(f"{name}: {pol[0]} Ω ∠ {np.rad2deg(pol[1])}°")
+    if phasor_type == "voltage":
+        return print(f"{name}: {pol[0]} V ∠ {np.rad2deg(pol[1])}°")
+    if phasor_type == "current":
+        return print(f"{name}: {pol[0]} A ∠ {np.rad2deg(pol[1])}°")
+
+
+def sinusoid2cos(amplitude: float, phase_angle: float, is_sine: bool) -> complex:
+    """
+    Returns a rectangular complex number equivalent to a cosine form from a sinusoid signal.
+
+    Args:
+    amplitude: the sinusoid's amplitud, negative or positive.
+    phase angle: the sinusoid's phase angle in degrees.
+    is_sine: If True, converts sine to cosine. If False, converts cosine to cosine if the amplitude < 0, or returns the same input if amplitud > 0.
+    """
+    phase_angle_rad = np.deg2rad(phase_angle)
+
+    if is_sine is True:
+        if amplitude < 0:
+            phase_angle_rad += (np.pi / 2)
+            return cmath.rect(amplitude * -1, phase_angle_rad)
+        if amplitude > 0:
+            phase_angle_rad -= (np.pi / 2)
+            return cmath.rect(amplitude, phase_angle_rad)
+    if is_sine is False:
+        if amplitude < 0:
+            phase_angle_rad -= (np.pi)
+            return cmath.rect(amplitude * -1, phase_angle_rad)
+        if amplitude > 0:
+            return cmath.rect(amplitude, phase_angle_rad)
+
+
+def sinusoids_phase_angle(s1: complex, s2: complex) -> float:
+    """
+    Returns the angle in degrees between two complex numbers equivalent to two cosine sinusoids.
+
+    Args:
+    s1, s2: rectangular complex numbers equivalent to cosine sinusoids.
+    """
+    s1_pol = cmath.polar(s1)
+    s2_pol = cmath.polar(s2)
+
+    if s1_pol[1] > s2_pol[1]:
+        return np.rad2deg(s1_pol[1] - s2_pol[1])
+    if s2_pol[1] > s1_pol[1]:
+        return np.rad2deg(s2_pol[1] - s1_pol[1])
+
+
+def lags_or_leads(s1: complex, s2: complex) -> None:
+    """
+    Determines which complex numbers s1 and s2, equivalent to two cosine sinusoids, lags or leads.
+
+    Args:
+    s1, s2: complex numbers in rectangular form.
+    """
+    s1_pol = cmath.polar(s1)
+    s2_pol = cmath.polar(s2)
+
+    if s1_pol[1] > s2_pol[1]:
+        phase_angle = np.rad2deg(s1_pol[1] - s2_pol[1])
+        return print(f"Sinusoid 1 leads sinusoid 2 in {phase_angle:.2f}°")
+    if s2_pol[1] > s1_pol[1]:
+        phase_angle = np.rad2deg(s2_pol[1] - s1_pol[1])
+        return print(f"Sinusoid 2 leads sinusoid 1 in {phase_angle:.2f}°")
+
+
+def sum_cosine_sinusoids(s1: complex, s2: complex) -> complex:
+    """
+    Returns the sum of two complex numbers, equivalent to two cosine sinusoids, in rectangular form.
+
+    Args:
+    s1, s2: complex numbers in rectangular form.
+    """
+    return s1 + s2

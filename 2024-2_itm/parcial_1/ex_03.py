@@ -1,6 +1,5 @@
 import sys
 import cmath
-import numpy as np
 
 sys.path.insert(1, "/home/om/personal/coding/ac_circuits")
 import helpers  # nopep8
@@ -19,6 +18,7 @@ zeq_rec = R1 + helpers.parallel_of_two(xl, xc + R2)
 zeq_pol = cmath.polar(zeq_rec)
 
 print("Exercise 3:")
-print(f"    Xc: {xc} Ω")
-print(f"    Xl: {xl} Ω")
-print(f"    Zeq: {zeq_rec:.4f} Ω = {zeq_pol[0]:.4f} Ω ∠{np.rad2deg(zeq_pol[1]):.2f}°. ANSWER")
+print(f"Xc: {xc} Ω")
+print(f"Xl: {xl} Ω")
+print(f"Zeq_rec: {zeq_rec} Ω. ANSWER")
+helpers.format_pol(zeq_pol, "impedance", "Zeq_pol")
