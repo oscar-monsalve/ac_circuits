@@ -1,4 +1,5 @@
-def parallel_of_two(z1: complex, z2: complex):
+
+def parallel_of_two(z1: complex, z2: complex) -> complex:
     """
     Returns the equivalent impedance of two parallel-connected impedances.
     """
@@ -16,7 +17,7 @@ def current_divider(z1: complex, z2: complex, i_total: complex) -> complex:
     return i_z1, i_z2
 
 
-def voltage_divider(z1: complex, z2: complex, vs: complex):
+def voltage_divider(z1: complex, z2: complex, vs: complex) -> complex:
     """
     Returns the voltage phasor drop at the impedances z1 and z2.
     """
@@ -50,3 +51,17 @@ def delta_to_star(za: complex, zb: complex, zc: complex) -> complex:
     z3 = (zb * zc) / (za + zb + zc)
 
     return z1, z2, z3
+
+
+def reactance_capacitor(C: float, omega: float) -> complex:
+    """
+    Return the capacitive reactance with a known capacitance C and the rotational frequency Ω.
+    """
+    return 1 / (omega * C * complex(0, 1))
+
+
+def reactance_inductor(L: float, omega: float) -> complex:
+    """
+    Return the inductive reactance with a known inductance L and the rotational frequency ω.
+    """
+    return omega * L * complex(0, 1)

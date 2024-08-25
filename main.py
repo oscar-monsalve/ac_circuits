@@ -15,7 +15,20 @@ def main() -> None:
     i1_pol = cmath.polar(i1)
     i2_pol = cmath.polar(i2)
 
-    print(f"Zeq: {zeq:.2f} Ω.")
+    C = 5 * 10**(-3)
+    L = 5 * 10**(-3)
+    omega = 2*np.pi*60
+
+    xc = helpers.reactance_capacitor(C, omega)
+    xl = helpers.reactance_inductor(L, omega)
+
+    phase = cmath.phase(xc)
+    print(np.rad2deg(phase))
+
+    print(f"xc: {xc} Ω")
+    print(f"xl: {xl} Ω\n")
+
+    print(f"Zeq: {zeq:.2f} Ω\n")
     print(f"I1 -> {i1_pol[0]:.2f} A ∠{np.rad2deg(i1_pol[1]):.2f}°")
     print(f"I2 -> {i2_pol[0]:.2f} A ∠{np.rad2deg(i2_pol[1]):.2f}°")
 
