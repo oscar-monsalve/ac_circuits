@@ -30,7 +30,7 @@ def voltage_divider(z1: complex, z2: complex, vs: complex) -> complex:
     return v_z1, v_z2
 
 
-def star_to_delta(z1: complex, z2: complex, z3: complex) -> complex:
+def star_to_delta(z1: complex, z2: complex, z3: complex) -> tuple[complex, complex, complex]:
     """
     converts from a star to a delta connection.
 
@@ -43,7 +43,7 @@ def star_to_delta(z1: complex, z2: complex, z3: complex) -> complex:
     return za, zb, zc
 
 
-def delta_to_star(za: complex, zb: complex, zc: complex) -> complex:
+def delta_to_star(za: complex, zb: complex, zc: complex) -> tuple[complex, complex, complex]:
     """
     converts from a delta to a star connection.
 
