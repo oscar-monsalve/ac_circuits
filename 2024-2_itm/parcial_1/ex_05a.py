@@ -17,6 +17,7 @@ def main() -> None:
     y = helpers.parallel_of_two(15j, zc)
 
     zeq = 8 - 12j + helpers.parallel_of_two(x + y, zb)
+    print("Solution exercise 5a:")
     print(f"zeq: {zeq} Ω. ANSWER")
 
     # Bonus

@@ -41,6 +41,7 @@ def main() -> None:
     sum_rec = helpers.sum_cosine_sinusoids(phasor1_rec, phasor2_rec)
     sum_pol = cmath.polar(sum_rec)
 
+    print("Solution exercise 1a:")
     helpers.format_pol(phasor1_pol, "voltage", "V1")
     helpers.format_pol(phasor2_pol, "voltage", "V2")
     print(f"The angle between v1 and v2 is: {sinusoids_phase_angle}°")

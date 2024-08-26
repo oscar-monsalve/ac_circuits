@@ -10,9 +10,9 @@ def parallel_of_two(z1: complex, z2: complex) -> complex:
     return (z1 * z2) / (z1 + z2)
 
 
-def current_divider(z1: complex, z2: complex, i_total: complex) -> complex:
+def current_divider(z1: complex, z2: complex, i_total: complex) -> tuple[complex, complex]:
     """
-    Returns the complex current flowing through the impedances z1 and z2.
+    Returns a tuple (complex, complex) of the currents flowing through the impedances z1 and z2.
     """
     i_z1 = (z2 / (z1 + z2)) * i_total
     i_z2 = (z1 / (z1 + z2)) * i_total
@@ -20,9 +20,9 @@ def current_divider(z1: complex, z2: complex, i_total: complex) -> complex:
     return i_z1, i_z2
 
 
-def voltage_divider(z1: complex, z2: complex, vs: complex) -> complex:
+def voltage_divider(z1: complex, z2: complex, vs: complex) -> tuple[complex, complex]:
     """
-    Returns the voltage phasor drop at the impedances z1 and z2.
+    Returns a tuple (complex, comple) of the voltages at the impedances z1 and z2.
     """
     v_z1 = (z1 / (z1 + z2)) * vs
     v_z2 = (z2 / (z1 + z2)) * vs
@@ -47,7 +47,7 @@ def delta_to_star(za: complex, zb: complex, zc: complex) -> tuple[complex, compl
     """
     converts from a delta to a star connection.
 
-    Returns the impedances z1, z2, z3 to form a star connection.
+    Returns a tuple of three impedances z1, z2, z3 to form a star connection.
     """
     z1 = (za * zb) / (za + zb + zc)
     z2 = (za * zc) / (za + zb + zc)
@@ -68,6 +68,28 @@ def reactance_inductor(L: float, omega: float) -> complex:
     Returns the inductive reactance with a known inductance L and the rotational frequency ω.
     """
     return omega * L * complex(0, 1)
+
+
+def voltage_inductor(i: complex, xl: complex) -> complex:
+    """
+    Returns the voltage at the inductor.
+
+    Args:
+    i: the complex-rectangular current flowing through the inductor.
+    xl: the complex-rectangular inductive reactance.
+    """
+    return i * xl
+
+
+def voltage_capacitor(i: complex, xc: complex) -> complex:
+    """
+    Returns the voltage at the capacitor.
+
+    Args:
+    i: the complex-rectangular current flowing through the capacitor.
+    xc: the complex-rectangular capacitive reactance.
+    """
+    return i * xc
 
 
 def format_pol(pol: tuple[float, float], phasor_type: str, name: str) -> None:

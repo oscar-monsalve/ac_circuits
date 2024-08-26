@@ -22,7 +22,7 @@ def main() -> None:
     i_rec = vs / zeq
     i_pol = cmath.polar(i_rec)
 
-    print("Solution exercise 2:")
+    print("Solution exercise 2a:")
     print(f"Xc: {xc} Ω")
     print(f"Xl: {xl} Ω")
     print(f"Zeq: {zeq} Ω")

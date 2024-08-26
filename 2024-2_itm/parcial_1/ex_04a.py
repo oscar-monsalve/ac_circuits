@@ -21,6 +21,7 @@ def main() -> None:
     i_rec = vs / zeq_rec
     i_pol = cmath.polar(i_rec)
 
+    print("Solution exercise 4a:")
     print(f"Zeq: {zeq_rec}")
     helpers.format_pol(zeq_pol, "impedance", "Zeq")
     helpers.format_pol(i_pol, "current", "I")
