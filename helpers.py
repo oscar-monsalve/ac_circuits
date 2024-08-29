@@ -5,6 +5,9 @@ import numpy as np
 def parallel_of_two(z1: complex, z2: complex) -> complex:
     """
     Returns the equivalent impedance of two parallel-connected impedances.
+
+    Args:
+    z1, z2: the complex-impedances in rectangular form.
     """
 
     return (z1 * z2) / (z1 + z2)
