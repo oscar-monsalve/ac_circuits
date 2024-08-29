@@ -4,18 +4,15 @@ import numpy as np
 
 
 def main() -> None:
-    z1 = 10-16j
-    z2 = 10
-    z3 = 10-16j
+    z1 = complex(2)
+    z2 = complex(3)
+    z3 = complex(4)
 
-    za, zb, zc = helpers.star_to_delta(z1, z2, z3)
+    zeq_par = helpers.parallel_of(z1, z2, z3)
+    zeq_ser = helpers.series_of(z1, z2, z3)
 
-    x = helpers.parallel_of_two(20, za)
-    y = helpers.parallel_of_two(15j, zc)
-
-    zeq = 8 - 12j + helpers.parallel_of_two(x + y, zb)
-
-    print(f"zeq: {zeq}")
+    print(zeq_par)
+    print(zeq_ser)
 
 
 if __name__ == "__main__":

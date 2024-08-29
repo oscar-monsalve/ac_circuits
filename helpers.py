@@ -2,6 +2,34 @@ import cmath
 import numpy as np
 
 
+def parallel_of(*z: complex) -> complex:
+    """
+    Returns the complex equivalent impedance of n-parallel-connected impedances.
+
+    Args:
+    z: any number of complex impedances in rectangular form.
+    """
+    sum = 0
+    for i in z:
+        sum += i ** -1
+
+    return sum ** -1
+
+
+def series_of(*z: complex) -> complex:
+    """
+    Returns the complex equivalent impedance of n-series-connected impedances.
+
+    Args:
+    z: any number of complex impedances in rectangular form.
+    """
+    sum = 0
+    for i in z:
+        sum += i
+
+    return sum
+
+
 def parallel_of_two(z1: complex, z2: complex) -> complex:
     """
     Returns the equivalent impedance of two parallel-connected impedances.
