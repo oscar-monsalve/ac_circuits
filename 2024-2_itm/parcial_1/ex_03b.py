@@ -1,7 +1,8 @@
 import cmath
 import sys
 
-sys.path.insert(1, "/home/om/personal/coding/ac_circuits")
+sys.path.insert(1, "/home/om/personal/coding/ac_circuits")  # linux
+sys.path.insert(1, "D:/OneDrive - Instituto Tecnológico Metropolitano/coding/ac_circuits")  # windows
 import helpers  # nopep8
 
 
